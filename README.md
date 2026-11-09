@@ -3,6 +3,8 @@
 Case de portfólio: diagnóstico financeiro e operacional de uma loja de materiais de construção que estagnou em R$ 450 mil de faturamento por mês, e plano de crescimento até 2029.
 
 > Empresa, pessoas e números fictícios, criados para fins de portfólio.
+   **🔗 Ver o case online:** https://samirdatabr.github.io/petra-home-center-case/
+   **📊 Dashboard interativo:** https://samirdatabr.github.io/petra-home-center-case/dashboard.html
 
 ![Capa do relatório](imagens/capa_relatorio-01.png)
 
@@ -58,4 +60,5 @@ Excel (DRE gerencial, curva ABC, capital de giro, 13 KPIs com fórmulas), modela
 ## Autor
 
 **Samir Abdul Rahman** · Análise de negócios, BI e eficiência operacional para o varejo de materiais de construção.
-LinkedIn: [adicione o link do seu perfil]
+   LinkedIn: [linkedin.com/in/samir-abdul-rahman-743b2932]
+            (www.linkedin.com/in/samir-abdul-rahman-743b2932)
