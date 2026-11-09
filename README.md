@@ -43,7 +43,6 @@ Três frentes e doze iniciativas: **mix e margem** (showroom de acabamentos, cen
 | `relatorios/` | `Petra_Home_Center_Dashboard.pdf` | Dashboard de KPIs, cenário atual e ideal |
 | `dados/` | `Petra_Home_Center_Cenario_Atual_2026.xlsx` | Modelo preenchido, cenário atual |
 | `dados/` | `Petra_Home_Center_Cenario_Ideal_2029.xlsx` | Modelo preenchido, cenário ideal |
-| `dados/` | `Modelo_Viabilidade_em_branco.xlsx` | Modelo para uso em outras lojas |
 | `docs/` | `index.html` | Versão web do case (GitHub Pages) |
 | `docs/` | `dashboard.html` | Dashboard interativo: envie uma planilha e veja os KPIs |
 
