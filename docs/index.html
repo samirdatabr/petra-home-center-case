@@ -1,0 +1,438 @@
+<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"></head><body>
+<title>Case Petra Home Center</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Barlow+Condensed:wght@500;600;700&display=swap">
+<style>
+/* Layout: relatório de consultoria em páginas A4 (impressão) que vira um case de leitura contínua na tela. Paleta deliberadamente única e clara: papel branco, tinta grafite, laranja "tijolo" como acento, azul técnico para dados. */
+:root{
+  --paper:#FFFFFF; --ink:#16191D; --graphite:#454C55; --soft:#F3F4F6; --line:#D9DDE2;
+  --brick:#D9620F; --blue:#1452A8; --good:#1D8A3B; --warn:#C25E00; --bad:#C42B2B;
+  --good-bg:#E5F3E9; --warn-bg:#FCEEE0; --bad-bg:#FBE7E7;
+  --f-display:"Barlow Condensed","Arial Narrow",Arial,sans-serif;
+  --f-body:"Barlow","Segoe UI",Arial,sans-serif;
+  color-scheme:light;
+}
+html,body{background:var(--paper);color:var(--ink)}
+body{font-family:var(--f-body);font-size:14.5px;line-height:1.55}
+.doc{max-width:900px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:24px 60px}
+.page{padding-block:34px;border-bottom:1px solid var(--line);display:grid;gap:16px}
+.page:last-child{border-bottom:0}
+h1,h2,h3{font-family:var(--f-display);margin:0;text-wrap:balance;line-height:1.08}
+h1{font-size:clamp(2.4rem,6vw,3.6rem);font-weight:700}
+h2{font-size:1.9rem;font-weight:700}
+h3{font-size:1.2rem;font-weight:600;break-after:avoid}
+p{margin:0;max-width:72ch}
+.kicker{font-size:.74rem;text-transform:uppercase;letter-spacing:.1em;font-weight:700;color:var(--brick)}
+.muted{color:var(--graphite)}
+.small{font-size:.82rem}
+.num{font-variant-numeric:tabular-nums}
+ul,ol{margin:0;padding-left:1.2em;display:grid;gap:4px;max-width:72ch}
+strong{font-weight:700}
+
+/* capa */
+.cover{min-height:auto;align-content:start;gap:22px;border-bottom:4px solid var(--ink)}
+.cover .band{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;font-family:var(--f-display);font-weight:700;letter-spacing:.08em;text-transform:uppercase;font-size:.85rem}
+.cover .band span:last-child{color:var(--brick)}
+.mark{width:54px;height:54px;background:var(--brick);clip-path:polygon(0 100%,50% 0,100% 100%,72% 100%,50% 52%,28% 100%)}
+.cover .sub{font-size:1.25rem;color:var(--graphite);max-width:60ch}
+.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:0;border-top:1px solid var(--ink);border-bottom:1px solid var(--ink)}
+.facts div{padding:12px 12px 12px 0;min-width:0}
+.facts b{display:block;font-family:var(--f-display);font-size:1.6rem;line-height:1.1}
+.facts span{font-size:.8rem;color:var(--graphite)}
+.disclaimer{font-size:.8rem;color:var(--graphite);border-left:3px solid var(--brick);padding-left:10px}
+
+/* blocos */
+.cols{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+.stack{display:grid;gap:18px}
+.cols3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.box{background:var(--soft);border-radius:8px;padding:14px 16px;display:grid;gap:6px;align-content:start;min-width:0}
+.box h3{font-size:1.05rem}
+.callout{border-left:5px solid var(--brick);background:var(--soft);padding:14px 16px;border-radius:0 8px 8px 0;display:grid;gap:6px}
+.callout.bad{border-color:var(--bad)} .callout.good{border-color:var(--good)}
+.big{font-family:var(--f-display);font-size:2.2rem;font-weight:700;line-height:1}
+.big.bad{color:var(--bad)} .big.good{color:var(--good)}
+.chart{position:relative;height:280px;width:100%}
+.chart.tall{height:330px}
+figure{margin:0;display:grid;gap:6px;min-width:0}
+figcaption{font-weight:600;font-size:.92rem}
+.src{font-size:.75rem;color:var(--graphite)}
+.tw{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:.84rem}
+th,td{padding:6px 8px;border-bottom:1px solid var(--line);text-align:right;font-variant-numeric:tabular-nums;vertical-align:top}
+th:first-child,td:first-child{text-align:left}
+th{font-size:.72rem;text-transform:uppercase;letter-spacing:.05em;color:var(--graphite);border-bottom:2px solid var(--ink)}
+tr.t td{font-weight:700;background:var(--soft)}
+td.l,th.l{text-align:left}
+.pill{display:inline-block;font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.04em;padding:1px 7px;border-radius:999px;white-space:nowrap}
+.p-good{background:var(--good-bg);color:var(--good)} .p-warn{background:var(--warn-bg);color:var(--warn)} .p-bad{background:var(--bad-bg);color:var(--bad)}
+.g-list{display:grid;gap:10px;counter-reset:g}
+.g{display:grid;grid-template-columns:44px minmax(0,1fr);gap:12px;align-items:start;padding:12px 0;border-top:1px solid var(--line)}
+.g::before{counter-increment:g;content:"G" counter(g);font-family:var(--f-display);font-weight:700;font-size:1.4rem;color:var(--bad)}
+.g p{max-width:none}
+.front{border-top:4px solid var(--ink);padding-top:10px;display:grid;gap:10px}
+.front h3{font-size:1.35rem}
+.ini{display:grid;grid-template-columns:52px minmax(0,1fr);gap:10px;padding:8px 0;border-top:1px solid var(--line)}
+.ini b.code{font-family:var(--f-display);font-size:1.1rem;color:var(--brick)}
+.ini .meta{font-size:.8rem;color:var(--graphite)}
+.mvv{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.tag{display:inline-block;background:var(--ink);color:var(--paper);font-size:.7rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:2px 8px;border-radius:3px}
+footer{font-size:.78rem;color:var(--graphite)}
+
+@media (max-width:640px){ .cols,.cols3,.mvv{grid-template-columns:minmax(0,1fr)} .chart{height:250px} }
+@media print{
+  @page{size:A4;margin:14mm 13mm 14mm 13mm}
+  body{font-size:10.6pt}
+  .doc{max-width:none;padding:0}
+  .page{border:0;padding:0;break-before:page;gap:12px}
+  .page.cover{break-before:auto}
+  .box,.callout,figure,.g,.ini,table,tr{break-inside:avoid}
+  .chart{height:230px} .chart.tall{height:270px}
+  h2{font-size:22pt}
+}
+</style>
+
+<div class="doc">
+
+<!-- CAPA -->
+<section class="page cover" id="capa">
+  <div class="band"><span>Case de portfólio · Análise de viabilidade</span><span>Varejo de materiais de construção</span></div>
+  <div class="mark" aria-hidden="true"></div>
+  <div class="kicker">Petra Home Center · Foz do Iguaçu/PR</div>
+  <h1>Do alicerce ao acabamento: o caminho de crescimento da Petra</h1>
+  <p class="sub">Diagnóstico de viabilidade, gargalos de gestão e plano de crescimento de uma loja de materiais de construção que estagnou em R$ 450 mil por mês.</p>
+  <div class="facts" id="coverFacts"></div>
+  <div class="cols">
+    <div class="box"><h3>O que este case entrega</h3>
+      <ul><li>Modelo de dados em Excel (DRE, vendas por categoria, curva ABC, capital de giro)</li><li>Dashboard de KPIs com referências de mercado</li><li>Diagnóstico com 6 gargalos quantificados</li><li>Plano de ação em 3 frentes e cenário ideal para 2029</li></ul></div>
+    <div class="box"><h3>Autor</h3><p><strong>Samir Abdul Rahman</strong><br>Análise de negócios, BI e eficiência operacional para o varejo de materiais de construção.</p><p class="small muted">Ferramentas: Excel, modelagem financeira, dashboard em HTML/JavaScript.</p></div>
+  </div>
+  <p class="disclaimer">Empresa, pessoas e números fictícios, criados para fins de portfólio. O CNPJ segue o formato da Receita Federal mas não corresponde a uma empresa real. As referências de KPIs são parâmetros gerenciais usuais do setor, não um estudo oficial.</p>
+</section>
+
+<!-- SUMÁRIO -->
+<section class="page" id="sumario">
+  <div class="kicker">1 · Sumário executivo</div>
+  <h2>A Petra vende muito do que dá pouca margem e financia os clientes com o próprio caixa</h2>
+  <p id="sumTxt"></p>
+  <div class="cols">
+    <div class="callout bad"><div class="kicker" style="color:var(--bad)">Hoje · 2026</div><div class="big bad num" id="sumScoreA"></div><p id="sumA"></p></div>
+    <div class="callout good"><div class="kicker" style="color:var(--good)">Cenário ideal · meta 2029</div><div class="big good num" id="sumScoreI"></div><p id="sumI"></p></div>
+  </div>
+  <h3>Principais conclusões</h3>
+  <ol id="sumList"></ol>
+  <h3>Recomendação</h3>
+  <p>Reposicionar a Petra como <strong>home center de acabamentos com base sólida em material básico</strong>: manter o básico como porta de entrada do cliente de obra (B2B e B2C), mas com preço técnico, compra pela rede e entrega direta da fábrica; e usar o espaço, a equipe e o caixa liberado para crescer em tintas, pisos, revestimentos, metais e louças, onde a margem bruta é de 36% a 49%.</p>
+</section>
+
+<!-- EMPRESA -->
+<section class="page" id="empresa">
+  <div class="kicker">2 · A empresa</div>
+  <h2>Petra Home Center</h2>
+  <div class="cols">
+    <div class="tw"><table><tbody id="ficha"></tbody></table></div>
+    <div class="box"><h3>Localização estratégica</h3><p>Avenida Costa e Silva, 2450, no Polo Centro, próximo à rotatória de acesso da BR-277 e a poucos minutos do Cataratas JL Shopping. A rodovia facilita a descarga de caminhões vindos de outras cidades e coloca a loja no eixo de entrada da Tríplice Fronteira.</p>
+    <p class="small muted">Slogan: <em>“Do alicerce ao acabamento, a força da sua obra.”</em></p></div>
+  </div>
+  <div class="mvv">
+    <div class="box"><span class="tag">Missão</span><p class="small">Prover soluções sólidas e inovadoras para construir e transformar espaços, unindo a tradição de materiais resistentes à modernidade do design arquitetônico, com confiança, excelência no atendimento e logística ágil.</p></div>
+    <div class="box"><span class="tag">Visão</span><p class="small">Ser o Home Center de referência em Foz do Iguaçu e região da Tríplice Fronteira até 2031, reconhecido pelo portfólio, pela inovação em acabamentos e pela sustentabilidade na logística e distribuição.</p></div>
+    <div class="box"><span class="tag">Valores</span><ul class="small"><li>Solidez e confiança</li><li>Tradição com inovação</li><li>Agilidade logística</li><li>Compromisso local</li></ul></div>
+  </div>
+  <h3>Públicos-alvo</h3>
+  <div class="cols3">
+    <div class="box"><h3>B2C · Reforma e apartamento novo</h3><p class="small">Famílias de classe média e média-alta do Polo Centro, Jardim Central e entorno da Vila A. Valorizam acabamentos finos, porcelanatos, iluminação e jardinagem, e buscam exclusividade no design de interiores.</p></div>
+    <div class="box"><h3>B2B · Construtoras e especificadores</h3><p class="small">Construtoras, engenheiros e arquitetos com vários canteiros (hotéis, residenciais, obras corporativas). Compram cimento, ferragens e tijolos em volume e precisam de entrega confiável.</p></div>
+    <div class="box"><h3>Internacional · Tríplice Fronteira</h3><p class="small">Compradores de Ciudad del Este e Puerto Iguazú e brasiguaios que procuram marcas brasileiras de acabamento, variedade de estoque e retirada fácil.</p></div>
+  </div>
+</section>
+
+<!-- METODOLOGIA -->
+<section class="page" id="metodo">
+  <div class="kicker">3 · Metodologia</div>
+  <h2>Como a análise foi feita</h2>
+  <div class="cols">
+    <div class="box"><h3>1. Coleta em modelo padrão</h3><p class="small">Faturamento mensal por subcategoria (231 linhas, 21 categorias), CMV, estoque médio, DRE gerencial mensal e saldos de capital de giro, lançados no modelo Excel de viabilidade.</p></div>
+    <div class="box"><h3>2. KPIs e referências</h3><p class="small">13 indicadores de rentabilidade, estrutura de custos, estoque, capital de giro e produtividade, comparados com parâmetros usuais do varejo de materiais de construção. Cada um recebe verde, laranja ou vermelho e entra em uma nota de saúde de 0 a 100.</p></div>
+    <div class="box"><h3>3. Diagnóstico</h3><p class="small">Cruzamento de mix, margem e prazos para achar a causa dos números ruins, e não só o sintoma. Curva ABC por subcategoria e ponte de resultado.</p></div>
+    <div class="box"><h3>4. Cenário ideal</h3><p class="small">Projeção do ano-meta (2029) com premissas explícitas de mix, margem, despesas e prazos, recalculada no mesmo modelo. A diferença entre os cenários vira o plano de ação.</p></div>
+  </div>
+  <figure><figcaption>Referências usadas na avaliação</figcaption><div class="tw"><table id="refTable"></table></div>
+  <p class="src">Margens calculadas sobre a receita líquida (após impostos e devoluções). Faturamento por funcionário comparado a R$ 50 mil por mês, parâmetro de eficiência da rede.</p></figure>
+</section>
+
+<!-- CENÁRIO ATUAL -->
+<section class="page" id="atual">
+  <div class="kicker">4 · Cenário atual · 2026</div>
+  <h2>Faturamento parado e a loja operando abaixo do ponto de equilíbrio</h2>
+  <div class="facts" id="factsA"></div>
+  <div class="cols">
+    <figure><figcaption>Resultado do ano (DRE gerencial)</figcaption><div class="tw"><table id="dreA"></table></div></figure>
+    <figure><figcaption>Receita bruta mensal x ponto de equilíbrio</figcaption><div class="chart"><canvas id="cPE"></canvas></div><p class="src" id="peTxt"></p></figure>
+  </div>
+  <figure><figcaption>Indicadores-chave · situação atual</figcaption><div class="tw"><table id="kpiA"></table></div></figure>
+</section>
+
+<!-- DIAGNÓSTICO -->
+<section class="page" id="diagnostico">
+  <div class="kicker">5 · Diagnóstico</div>
+  <h2>Seis gargalos explicam a estagnação</h2>
+  <div class="cols">
+    <figure><figcaption>Quem vende x quem dá lucro (2026)</figcaption><div class="chart"><canvas id="cMix"></canvas></div><p class="src">Participação de cada grupo na receita bruta e no lucro bruto.</p></figure>
+    <figure><figcaption>Margem bruta por categoria e peso nas vendas</figcaption><div class="chart"><canvas id="cMarg"></canvas></div><p class="src">Barras: margem bruta (% da receita líquida). Rótulo: participação nas vendas.</p></figure>
+  </div>
+  <div class="g-list" id="gList"></div>
+</section>
+
+<section class="page" id="diag2">
+  <div class="kicker">5 · Diagnóstico (continuação)</div>
+  <h2>O dinheiro fica preso 104 dias entre comprar e receber</h2>
+  <div class="stack">
+    <figure><figcaption>Ciclo financeiro em dias: atual x ideal</figcaption><div class="chart"><canvas id="cCiclo"></canvas></div><p class="src">PME: estocagem · PMR: recebimento · PMP: pagamento a fornecedores. Ciclo financeiro = PME + PMR − PMP.</p></figure>
+    <figure><figcaption>Curva ABC · subcategorias que mais vendem (2026)</figcaption><div class="tw"><table id="abcA"></table></div></figure>
+  </div>
+  <div class="callout"><h3>Leitura de consultoria</h3><p>A Petra cresceu como depósito de material básico: muito volume, pouca margem e operação pesada (pátio, carga, frota). A estrutura de uma loja de 1.200 m² com 15 pessoas foi montada, mas o mix não paga essa estrutura. O problema não é de despesa (as fixas estão em 16% da receita líquida, dentro da referência), é de <strong>margem e de capital de giro</strong>.</p></div>
+</section>
+
+<!-- PLANO -->
+<section class="page" id="plano">
+  <div class="kicker">6 · Plano de ação</div>
+  <h2>Três frentes, doze iniciativas</h2>
+  <div id="fronts" style="display:grid;gap:18px"></div>
+</section>
+
+<section class="page" id="roadmap">
+  <div class="kicker">6 · Plano de ação (continuação)</div>
+  <h2>Cronograma, investimento e metas anuais</h2>
+  <div class="cols3">
+    <div class="box"><span class="tag">0 a 6 meses</span><h3>Ganhos rápidos</h3><ul class="small"><li>Política de crédito B2B e desconto para Pix</li><li>Frete cobrado por faixa</li><li>Renegociação de cartão</li><li>Compras de básico pela rede</li><li>Ritual mensal de indicadores</li></ul></div>
+    <div class="box"><span class="tag">6 a 18 meses</span><h3>Estruturação</h3><ul class="small"><li>Showroom de acabamentos</li><li>Centro de cores com tintometria</li><li>Programa de especificadores</li><li>Estoque por classe ABC</li><li>Requalificação da equipe</li></ul></div>
+    <div class="box"><span class="tag">18 a 36 meses</span><h3>Escala</h3><ul class="small"><li>Entrega direta de fábrica para obras</li><li>Canal Tríplice Fronteira</li><li>Venda por projeto completo</li><li>Ajuste fino de sortimento</li></ul></div>
+  </div>
+  <div class="cols">
+    <figure><figcaption>Metas anuais: faturamento mensal e margem EBITDA</figcaption><div class="chart"><canvas id="cTraj"></canvas></div><p class="src">2027 e 2028 são metas intermediárias do plano; 2026 e 2029 vêm dos modelos completos.</p></figure>
+    <div class="box"><h3>Investimento e financiamento</h3>
+      <p class="small">Investimento estimado de <strong>R$ 360 mil</strong> (showroom, tintometria, sistema de BI e projetos), depreciado em 10 anos.</p>
+      <p class="small">A redução do ciclo financeiro de 104 para 43 dias diminui a necessidade de capital de giro em <strong id="ncgLib"></strong>, mesmo com faturamento 69% maior. Esse caixa liberado paga quase todo o investimento, sem dívida nova.</p>
+      <p class="small">Com o lucro líquido do cenário ideal, o investimento se paga em menos de um ano de operação madura.</p></div>
+  </div>
+  <figure><figcaption>Metas por indicador</figcaption><div class="tw"><table id="metas"></table></div></figure>
+</section>
+
+<!-- CENÁRIO IDEAL -->
+<section class="page" id="ideal">
+  <div class="kicker">7 · Cenário ideal · meta 2029</div>
+  <h2>Mesma equipe, mix diferente: R$ 760 mil por mês e lucro de R$ 499 mil no ano</h2>
+  <div class="facts" id="factsI"></div>
+  <div class="stack">
+    <figure><figcaption>Mix de vendas: atual x ideal</figcaption><div class="chart"><canvas id="cMix2"></canvas></div></figure>
+    <figure><figcaption>Da perda de 2026 ao lucro de 2029 (R$ mil)</figcaption><div class="chart"><canvas id="cBridge"></canvas></div><p class="src">Volume: lucro bruto extra com a margem atual. Mix e margem: ganho por vender mais acabamento e comprar melhor.</p></figure>
+  </div>
+  <figure><figcaption>Premissas do cenário ideal</figcaption><div class="tw"><table id="prem"></table></div></figure>
+</section>
+
+<section class="page" id="compara">
+  <div class="kicker">8 · Comparativo</div>
+  <h2>Atual x ideal, indicador por indicador</h2>
+  <div class="stack">
+    <figure><figcaption>DRE comparativa (ano)</figcaption><div class="tw"><table id="dreC"></table></div></figure>
+    <figure><figcaption>KPIs: de 1 para 12 indicadores dentro da referência</figcaption><div class="tw"><table id="kpiC"></table></div></figure>
+  </div>
+  <div class="cols">
+    <div class="box"><h3>Riscos e como mitigar</h3><ul class="small">
+      <li><strong>Execução do showroom:</strong> abrir por etapas (pisos e revestimentos primeiro) e medir venda por m².</li>
+      <li><strong>Perder o cliente de obra:</strong> manter itens-isca de básico com preço competitivo e garantia de entrega.</li>
+      <li><strong>Juros e crédito:</strong> o plano depende menos de capital de terceiros porque libera caixa do giro.</li>
+      <li><strong>Câmbio:</strong> a demanda do Paraguai e da Argentina oscila; tratar como bônus, não como base do plano.</li>
+      <li><strong>Comissão de especificadores:</strong> limitar a reserva técnica a uma faixa de margem por categoria.</li></ul></div>
+    <div class="box"><h3>Como acompanhar</h3><ul class="small">
+      <li>Fechamento mensal no modelo Excel e leitura no dashboard</li>
+      <li>Reunião mensal de 60 minutos com os sócios: nota de saúde, KPIs em vermelho, plano de ação</li>
+      <li>Revisão trimestral da curva ABC e do sortimento</li>
+      <li>Meta anual revisada a cada dezembro</li></ul></div>
+  </div>
+  <footer>Case de portfólio elaborado por Samir Abdul Rahman · Dados fictícios · Modelo de viabilidade e dashboard próprios. Referências de KPIs: parâmetros gerenciais usuais do varejo de materiais de construção, ajustáveis ao perfil de cada loja.</footer>
+</section>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.js"></script>
+<script>
+const DATA = {"atual": {"kpi": {"Receita bruta (ano)": 5386670, "Receita bruta média mensal": 448889.166666667, "Receita líquida (ano)": 4821069, "Lucro bruto": 1067898.445, "Margem bruta %": 0.221506567319406, "Markup médio": 1.43523187157691, "Margem de contribuição": 799737.445, "Índice de margem de contribuição %": 0.165883841322329, "Despesas fixas (ano)": 789361, "Despesas fixas % da RL": 0.163731529252122, "EBITDA": 10376.4449999999, "Margem EBITDA %": 0.00215231207020681, "Lucro operacional (EBIT)": -25623.5550000001, "Margem operacional %": -0.0053149114853988, "Lucro líquido": -84762.5550000001, "Margem líquida %": -0.0175816929813699, "Ponto de equilíbrio (receita bruta/mês)": 463271.557191081, "Margem de segurança %": -0.0320399590643152, "Necessidade de capital de giro (NCG)": 1308975, "Giro de estoque (vezes/ano)": 4.29017538281283, "Prazo médio de estocagem - PME": 83.9126534179047, "Prazo médio de recebimento - PMR": 48.2724948808819, "Prazo médio de pagamento - PMP": 27.7260055754679, "Ciclo operacional": 132.185148298787, "Ciclo financeiro (de caixa)": 104.459142723319, "Ticket médio": 321.784348864994, "Faturamento por m² (mês)": 374.074305555556, "Faturamento por funcionário (mês)": 29925.9444444444, "Participação da Classe A nas vendas": 0.80252178061771}, "dre": {"RECEITA BRUTA": {"ano": 5386670, "m": [385790, 392510, 437090, 440950, 458740, 440190, 444770, 473940, 477310, 484490, 482190, 468700]}, "(-) Impostos sobre vendas (DAS, ICMS, PIS/COFINS)": {"ano": 484801}, "(-) Devoluções e descontos": {"ano": 80800}, "RECEITA LÍQUIDA": {"ano": 4821069}, "(-) CMV (custo da mercadoria vendida)": {"ano": 3753170.555}, "LUCRO BRUTO": {"ano": 1067898.445}, "Margem bruta %": {"ano": 0.221506567319406}, "Comissões de vendedores": {"ano": 54082}, "Taxas de cartão / antecipação": {"ano": 117914}, "Fretes e entregas": {"ano": 74978}, "Outras despesas variáveis": {"ano": 21187}, "MARGEM DE CONTRIBUIÇÃO": {"ano": 799737.445}, "Índice de margem de contribuição %": {"ano": 0.165883841322329}, "Folha de pagamento + encargos": {"ano": 492000}, "Pró-labore dos sócios": {"ano": 108000}, "Aluguel e IPTU": {"ano": 78000}, "Energia, água, telefone e internet": {"ano": 29037}, "Marketing e propaganda": {"ano": 10800}, "Sistemas e TI": {"ano": 10800}, "Manutenção e conservação": {"ano": 27053}, "Contabilidade e administrativas": {"ano": 19200}, "Outras despesas fixas": {"ano": 14471}, "TOTAL DESPESAS FIXAS": {"ano": 789361}, "EBITDA": {"ano": 10376.4449999999}, "Margem EBITDA %": {"ano": 0.00215231207020681}, "(-) Depreciação e amortização": {"ano": 36000}, "LUCRO OPERACIONAL (EBIT)": {"ano": -25623.5550000001}, "Margem operacional %": {"ano": -0.0053149114853988}, "(+) Receitas financeiras": {"ano": 3600}, "(-) Despesas financeiras (juros, tarifas)": {"ano": 62739}, "LUCRO ANTES DO IR (LAIR)": {"ano": -84762.5550000001}, "(-) IR / CSLL (zero se Simples Nacional)": {"ano": 0}, "LUCRO LÍQUIDO": {"ano": -84762.5550000001}, "Margem líquida %": {"ano": -0.0175816929813699}}, "cats": [{"cat": "Material Básico", "vendas": 3226980, "mb": 0.12776135363742383, "giro": 5.82328598474341}, {"cat": "Tintas", "vendas": 434100, "mb": 0.3651829419115385, "giro": 2.4109365200391}, {"cat": "Hidráulica", "vendas": 378010, "mb": 0.31565609611876605, "giro": 3.0544394591029}, {"cat": "Materiais Elétricos", "vendas": 324460, "mb": 0.3390746223118636, "giro": 3.03202597156398}, {"cat": "Pisos e Revestimentos", "vendas": 241450, "mb": 0.4406103025135616, "giro": 2.44207787878788}, {"cat": "Ferragens", "vendas": 215930, "mb": 0.3790013833885231, "giro": 3.05375437659033}, {"cat": "Madeiras", "vendas": 134940, "mb": 0.22847390895022243, "giro": 3.03512081433225}, {"cat": "Metais", "vendas": 107900, "mb": 0.4744897458333549, "giro": 2.36040874418605}, {"cat": "Louças Sanitárias", "vendas": 81210, "mb": 0.4448012222949123, "giro": 2.37373441176471}, {"cat": "Ferramentas", "vendas": 53880, "mb": 0.324405672858784, "giro": 3.1940112745098}, {"cat": "Portas e Esquadrias", "vendas": 53670, "mb": 0.3100972735306701, "giro": 2.85683068965517}, {"cat": "Duchas e Chuveiros", "vendas": 53190, "mb": 0.3217059114526716, "giro": 2.90902918918919}, {"cat": "Impermeabilizantes", "vendas": 26960, "mb": 0.3950423553205245, "giro": 2.35437806451613}, {"cat": "EPI", "vendas": 16160, "mb": 0.3996798772055977, "giro": 3.10091071428571}, {"cat": "Acessórios para banheiro", "vendas": 16130, "mb": 0.4990085444035369, "giro": 2.41082933333333}, {"cat": "Utilidades Domésticas", "vendas": 10810, "mb": 0.45903348337717514, "giro": 2.75464421052632}, {"cat": "Decoração", "vendas": 5480, "mb": 0.5482031154426458, "giro": 2.01443909090909}, {"cat": "Móveis", "vendas": 5410, "mb": 0.42619626390194026, "giro": 2.52575363636364}], "abc": [{"cls": "A – Alto giro (não pode faltar)", "n": 41, "pi": 0.177489177489178, "v": 4322920, "pv": 0.80252178061771}, {"cls": "B – Intermediário", "n": 56, "pi": 0.242424242424242, "v": 797230, "pv": 0.148000527227397}, {"cls": "C – Baixa representatividade", "n": 95, "pi": 0.411255411255411, "v": 266520, "pv": 0.0494776921548935}, {"cls": "Sem venda no período", "n": 39, "pi": 0.168831168831169, "v": 0, "pv": 0}], "op": {"Nº de vendas / cupons emitidos": 16740, "Estoque final (R$ a custo)": 876758.333333333, "Contas a receber (saldo fim do mês)": 722300, "Fornecedores a pagar (saldo fim do mês)": 290083.333333333, "Compras de mercadorias no mês (R$)": 3766500, "INDICADORES CALCULADOS (automático)": null, "Ticket médio (R$ por venda)": 321.784348864994, "Estoque médio (R$)": 874829.166666667, "Giro de estoque (vezes)": 4.29017538281283, "Prazo médio de estocagem - PME (dias)": 83.9126534179047, "Prazo médio de recebimento - PMR (dias)": 48.2724948808819, "Prazo médio de pagamento - PMP (dias)": 27.7260055754679, "Ciclo operacional (PME + PMR)": 132.185148298787, "Ciclo financeiro (Ciclo operacional - PMP)": 104.459142723319, "Necessidade de capital de giro - NCG (R$)": 1308975, "Faturamento por m² (R$/mês)": 374.074305555556, "Faturamento por funcionário (R$/mês)": 29925.9444444444}, "top": [{"cat": "Material Básico", "sub": "Cimento", "v": 708290, "cls": "A"}, {"cat": "Material Básico", "sub": "Ferro", "v": 518790, "cls": "A"}, {"cat": "Material Básico", "sub": "Blocos", "v": 399100, "cls": "A"}, {"cat": "Material Básico", "sub": "Argamassas", "v": 298830, "cls": "A"}, {"cat": "Material Básico", "sub": "Areia", "v": 290250, "cls": "A"}, {"cat": "Material Básico", "sub": "Tijolos", "v": 227660, "cls": "A"}, {"cat": "Material Básico", "sub": "Telhas e Acessórios", "v": 198430, "cls": "A"}, {"cat": "Material Básico", "sub": "Pedra Brita", "v": 194300, "cls": "A"}, {"cat": "Material Básico", "sub": "Lajes", "v": 131300, "cls": "A"}, {"cat": "Tintas", "sub": "Verniz", "v": 84000, "cls": "A"}, {"cat": "Pisos e Revestimentos", "sub": "Porcelanato", "v": 83600, "cls": "A"}, {"cat": "Material Básico", "sub": "Cal", "v": 82050, "cls": "A"}, {"cat": "Material Básico", "sub": "Rejunte", "v": 65770, "cls": "A"}, {"cat": "Tintas", "sub": "Acessórios de Pintura", "v": 64850, "cls": "A"}, {"cat": "Material Básico", "sub": "Ensacados", "v": 63930, "cls": "A"}]}, "ideal": {"kpi": {"Receita bruta (ano)": 9122210, "Receita bruta média mensal": 760184.166666667, "Receita líquida (ano)": 8164376, "Lucro bruto": 2497315.889, "Margem bruta %": 0.305879578427059, "Markup médio": 1.60969000175124, "Margem de contribuição": 2077585.889, "Índice de margem de contribuição %": 0.254469648262157, "Despesas fixas (ano)": 1230593, "Despesas fixas % da RL": 0.150727134566071, "EBITDA": 846992.889, "Margem EBITDA %": 0.103742513696087, "Lucro operacional (EBIT)": 774992.889, "Margem operacional %": 0.09492371358203, "Lucro líquido": 498843.889, "Margem líquida %": 0.0611000631279108, "Ponto de equilíbrio (receita bruta/mês)": 476615.950971562, "Margem de segurança %": 0.373025679998734, "Necessidade de capital de giro (NCG)": 967316.666666667, "Giro de estoque (vezes/ano)": 5.78709408753223, "Prazo médio de estocagem - PME": 62.2073867393287, "Prazo médio de recebimento - PMR": 30.6113321223695, "Prazo médio de pagamento - PMP": 49.959451359261, "Ciclo operacional": 92.8187188616982, "Ciclo financeiro (de caixa)": 42.8592675024372, "Ticket médio": 378.577772244356, "Faturamento por m² (mês)": 633.486805555556, "Faturamento por funcionário (mês)": 50678.9444444444, "Participação da Classe A nas vendas": 0.801691695323831}, "dre": {"RECEITA BRUTA": {"ano": 9122210, "m": [660500, 662120, 748030, 739890, 780870, 732500, 759620, 803520, 805910, 830810, 809300, 789140]}, "(-) Impostos sobre vendas (DAS, ICMS, PIS/COFINS)": {"ano": 821000}, "(-) Devoluções e descontos": {"ano": 136834}, "RECEITA LÍQUIDA": {"ano": 8164376}, "(-) CMV (custo da mercadoria vendida)": {"ano": 5667060.111}, "LUCRO BRUTO": {"ano": 2497315.889}, "Margem bruta %": {"ano": 0.305879578427059}, "Comissões de vendedores": {"ano": 137531}, "Taxas de cartão / antecipação": {"ano": 154933}, "Fretes e entregas": {"ano": 90974}, "Outras despesas variáveis": {"ano": 36292}, "MARGEM DE CONTRIBUIÇÃO": {"ano": 2077585.889}, "Índice de margem de contribuição %": {"ano": 0.254469648262157}, "Folha de pagamento + encargos": {"ano": 720000}, "Pró-labore dos sócios": {"ano": 192000}, "Aluguel e IPTU": {"ano": 78000}, "Energia, água, telefone e internet": {"ano": 40947}, "Marketing e propaganda": {"ano": 84000}, "Sistemas e TI": {"ano": 30000}, "Manutenção e conservação": {"ano": 31355}, "Contabilidade e administrativas": {"ano": 24000}, "Outras despesas fixas": {"ano": 30291}, "TOTAL DESPESAS FIXAS": {"ano": 1230593}, "EBITDA": {"ano": 846992.889}, "Margem EBITDA %": {"ano": 0.103742513696087}, "(-) Depreciação e amortização": {"ano": 72000}, "LUCRO OPERACIONAL (EBIT)": {"ano": 774992.889}, "Margem operacional %": {"ano": 0.09492371358203}, "(+) Receitas financeiras": {"ano": 18000}, "(-) Despesas financeiras (juros, tarifas)": {"ano": 37166}, "LUCRO ANTES DO IR (LAIR)": {"ano": 755826.889}, "(-) IR / CSLL (zero se Simples Nacional)": {"ano": 256983}, "LUCRO LÍQUIDO": {"ano": 498843.889}, "Margem líquida %": {"ano": 0.0611000631279108}}, "cats": [{"cat": "Material Básico", "vendas": 3649440, "mb": 0.15526794039694722, "giro": 8.74241152091255}, {"cat": "Tintas", "vendas": 1098800, "mb": 0.3868115384380726, "giro": 4.17607670360111}, {"cat": "Pisos e Revestimentos", "vendas": 1056710, "mb": 0.44270584747885944, "giro": 4.28855965825875}, {"cat": "Materiais Elétricos", "vendas": 639540, "mb": 0.3826461354992756, "giro": 4.5245343021767}, {"cat": "Hidráulica", "vendas": 589750, "mb": 0.33242047927703483, "giro": 4.4434551702396}, {"cat": "Metais", "vendas": 410700, "mb": 0.48646095438636583, "giro": 4.13958081140351}, {"cat": "Louças Sanitárias", "vendas": 320020, "mb": 0.467924092733031, "giro": 4.37919724137931}, {"cat": "Ferragens", "vendas": 318150, "mb": 0.39663458700219584, "giro": 4.50931317585302}, {"cat": "Madeiras", "vendas": 137270, "mb": 0.24751018361643434, "giro": 4.55410729064039}, {"cat": "Móveis", "vendas": 136960, "mb": 0.44516397561739673, "giro": 3.90869862068966}, {"cat": "Impermeabilizantes", "vendas": 109020, "mb": 0.4016143211895926, "giro": 4.14086709219858}, {"cat": "Decoração", "vendas": 108210, "mb": 0.5565710167329303, "giro": 4.38216204081633}, {"cat": "Ferramentas", "vendas": 91440, "mb": 0.3410240008406771, "giro": 4.34917782258065}, {"cat": "Duchas e Chuveiros", "vendas": 91200, "mb": 0.34837670293051065, "giro": 4.32423577235772}, {"cat": "Portas e Esquadrias", "vendas": 91150, "mb": 0.3106848126208564, "giro": 4.72553075630252}, {"cat": "Acessórios para banheiro", "vendas": 90910, "mb": 0.502501264372831, "giro": 4.49763455555556}, {"cat": "Banheiras", "vendas": 55360, "mb": 0.435466726676785, "giro": 4.17478253731343}, {"cat": "Lazer e piscina", "vendas": 54590, "mb": 0.4140839841131605, "giro": 4.27264388059702}, {"cat": "Utilidades Domésticas", "vendas": 45590, "mb": 0.4542168048712045, "giro": 4.28261903846154}, {"cat": "EPI", "vendas": 27400, "mb": 0.4014306569343066, "giro": 4.44809575757576}], "abc": [{"cls": "A – Alto giro (não pode faltar)", "n": 61, "pi": 0.264069264069264, "v": 7313200, "pv": 0.801691695323831}, {"cls": "B – Intermediário", "n": 65, "pi": 0.281385281385281, "v": 1358260, "pv": 0.148895936401376}, {"cls": "C – Baixa representatividade", "n": 79, "pi": 0.341991341991342, "v": 450750, "pv": 0.0494123682747931}, {"cls": "Sem venda no período", "n": 26, "pi": 0.112554112554113, "v": 0, "pv": 0}], "op": {"Nº de vendas / cupons emitidos": 24096, "Estoque final (R$ a custo)": 978808.333333333, "Contas a receber (saldo fim do mês)": 775675, "Fornecedores a pagar (saldo fim do mês)": 787166.666666667, "Compras de mercadorias no mês (R$)": 5672200, "INDICADORES CALCULADOS (automático)": null, "Ticket médio (R$ por venda)": 378.577772244356, "Estoque médio (R$)": 979258.333333333, "Giro de estoque (vezes)": 5.78709408753223, "Prazo médio de estocagem - PME (dias)": 62.2073867393287, "Prazo médio de recebimento - PMR (dias)": 30.6113321223695, "Prazo médio de pagamento - PMP (dias)": 49.959451359261, "Ciclo operacional (PME + PMR)": 92.8187188616982, "Ciclo financeiro (Ciclo operacional - PMP)": 42.8592675024372, "Necessidade de capital de giro - NCG (R$)": 967316.666666667, "Faturamento por m² (R$/mês)": 633.486805555556, "Faturamento por funcionário (R$/mês)": 50678.9444444444}, "top": [{"cat": "Material Básico", "sub": "Cimento", "v": 823070, "cls": "A"}, {"cat": "Material Básico", "sub": "Ferro", "v": 586740, "cls": "A"}, {"cat": "Material Básico", "sub": "Blocos", "v": 438560, "cls": "A"}, {"cat": "Pisos e Revestimentos", "sub": "Porcelanato", "v": 367650, "cls": "A"}, {"cat": "Tintas", "sub": "Corantes e Pigmentos", "v": 353170, "cls": "A"}, {"cat": "Material Básico", "sub": "Argamassas", "v": 330160, "cls": "A"}, {"cat": "Material Básico", "sub": "Areia", "v": 329260, "cls": "A"}, {"cat": "Tintas", "sub": "Massas e Texturas", "v": 278020, "cls": "A"}, {"cat": "Pisos e Revestimentos", "sub": "Piso Cerâmico", "v": 266420, "cls": "A"}, {"cat": "Material Básico", "sub": "Tijolos", "v": 259940, "cls": "A"}, {"cat": "Material Básico", "sub": "Pedra Brita", "v": 223510, "cls": "A"}, {"cat": "Material Básico", "sub": "Telhas e Acessórios", "v": 220370, "cls": "A"}, {"cat": "Pisos e Revestimentos", "sub": "Revestimento Cerâmico", "v": 158550, "cls": "A"}, {"cat": "Material Básico", "sub": "Lajes", "v": 145680, "cls": "A"}, {"cat": "Hidráulica", "sub": "Tubo Galvanizado", "v": 98130, "cls": "A"}]}, "bridge": {"LLa": -84762.555, "vol": 740564.457, "mix": 688852.987, "var": -151569, "fix": -441232, "dep": -36000, "fin": 39973, "ir": -256983, "LLi": 498843.889}, "groups": {"atual": [[0.599, 0.346], [0.171, 0.315], [0.23, 0.339]], "ideal": [[0.4, 0.203], [0.371, 0.529], [0.229, 0.268]]}, "traj": [{"ano": "2026", "rbm": 448889, "ebitda": 0.0022}, {"ano": "2027 (meta)", "rbm": 540000, "ebitda": 0.04}, {"ano": "2028 (meta)", "rbm": 650000, "ebitda": 0.075}, {"ano": "2029 (meta)", "rbm": 760184, "ebitda": 0.1037}]};
+const A = DATA.atual, I = DATA.ideal, B = DATA.bridge;
+const $ = id => document.getElementById(id);
+const brl = (v,d=0) => (v<0?"−":"") + "R$ " + Math.abs(v).toLocaleString("pt-BR",{maximumFractionDigits:d,minimumFractionDigits:d});
+const mi = v => (v<0?"−":"") + "R$ " + (Math.abs(v)/1e6).toLocaleString("pt-BR",{maximumFractionDigits:2,minimumFractionDigits:2}) + " mi";
+const mil = v => (v<0?"−":"") + "R$ " + Math.round(Math.abs(v)/1e3).toLocaleString("pt-BR") + " mil";
+const pct = (v,d=1) => (v*100).toLocaleString("pt-BR",{maximumFractionDigits:d,minimumFractionDigits:d}) + "%";
+const dias = v => Math.round(v) + " dias";
+const xx = v => v.toLocaleString("pt-BR",{maximumFractionDigits:1}) + "x";
+function el(t,a,...k){ const e=document.createElement(t); if(a) for(const[x,y] of Object.entries(a)){ if(x==="text") e.textContent=y; else if(x==="html") e.innerHTML=y; else e.setAttribute(x,y);} k.forEach(c=>c!=null&&e.append(c)); return e; }
+function table(id, head, rows){ const t=$(id); t.replaceChildren(); const th=el("thead"); th.append(el("tr",null,...head.map(h=>el("th",{text:h})))); const tb=el("tbody");
+  rows.forEach(r=>{ const tr=el("tr", r.t?{class:"t"}:null); (r.c||r).forEach(c=>{ const td=el("td"); if(c instanceof Node) td.append(c); else td.textContent=c; tr.append(td); }); tb.append(tr); }); t.append(th,tb); }
+const K = s => s.kpi, D = (s,k) => s.dre[k].ano;
+const kA=K(A), kI=K(I);
+const REF = [
+ ["Margem bruta %","Margem bruta",pct,"max",.30,.25],
+ ["Índice de margem de contribuição %","Margem de contribuição",pct,"max",.20,.14],
+ ["Margem EBITDA %","Margem EBITDA",pct,"max",.08,.04],
+ ["Margem líquida %","Margem líquida",pct,"max",.05,.02],
+ ["Despesas fixas % da RL","Despesas fixas / receita líquida",pct,"min",.20,.28],
+ [null,"Folha / receita líquida",pct,"min",.10,.14,"folha"],
+ ["Margem de segurança %","Margem de segurança",pct,"max",.25,.10],
+ ["Giro de estoque (vezes/ano)","Giro de estoque",xx,"max",5,3],
+ ["Prazo médio de estocagem - PME","Prazo médio de estocagem",dias,"min",75,120],
+ ["Prazo médio de recebimento - PMR","Prazo médio de recebimento",dias,"min",30,45],
+ ["Prazo médio de pagamento - PMP","Prazo médio de pagamento",dias,"max",45,30],
+ ["Ciclo financeiro (de caixa)","Ciclo financeiro",dias,"min",45,75],
+ ["Faturamento por funcionário (mês)","Faturamento por funcionário (mês)",v=>brl(v),"max",50000,40000],
+];
+const folha = s => D(s,"Folha de pagamento + encargos")/D(s,"RECEITA LÍQUIDA");
+const val = (s,r) => r[6]==="folha" ? folha(s) : K(s)[r[0]];
+const st = (r,v) => r[3]==="max" ? (v>=r[4]?"good":v<r[5]?"bad":"warn") : (v<=r[4]?"good":v>r[5]?"bad":"warn");
+const PL = {good:"Bom",warn:"Atenção",bad:"Crítico"};
+const pill = s => el("span",{class:"pill p-"+s,text:PL[s]});
+const refTxt = r => r[3]==="max" ? `≥ ${r[2](r[4])}` : `≤ ${r[2](r[4])}`;
+const badTxt = r => r[3]==="max" ? `< ${r[2](r[5])}` : `> ${r[2](r[5])}`;
+const score = s => { const sc={good:100,warn:60,bad:20}; return Math.round(REF.reduce((a,r)=>a+sc[st(r,val(s,r))],0)/REF.length); };
+const cnt = (s,x) => REF.filter(r=>st(r,val(s,r))===x).length;
+const scA=score(A), scI=score(I);
+
+/* capa */
+const fact = (id, items) => $(id).replaceChildren(...items.map(([b,s])=>el("div",null,el("b",{class:"num",text:b}),el("span",{text:s}))));
+fact("coverFacts",[["R$ 449 mil","faturamento médio mensal (2026)"],["15","funcionários"],["1.200 m²","área de vendas"],["Desde 2022","CNPJ 45.892.314/0001-85"]]);
+
+/* sumário */
+const rbmA=kA["Receita bruta média mensal"], rbmI=kI["Receita bruta média mensal"];
+$("sumTxt").textContent = `A Petra Home Center fatura em média ${mil(rbmA)} por mês, mas 60% disso é material básico com margem bruta de 13%. O resultado é uma margem de contribuição que não cobre a estrutura: a loja precisa vender ${mil(kA["Ponto de equilíbrio (receita bruta/mês)"])} por mês para empatar e fechou 2026 com prejuízo de ${mil(-D(A,"LUCRO LÍQUIDO"))}. Ao mesmo tempo, o ciclo financeiro de ${dias(kA["Ciclo financeiro (de caixa)"])} prende ${mi(kA["Necessidade de capital de giro (NCG)"])} em estoque e contas a receber.`;
+$("sumScoreA").textContent = `${scA}/100 · Em risco`;
+$("sumA").textContent = `${cnt(A,"bad")} KPIs críticos, ${cnt(A,"warn")} em atenção e ${cnt(A,"good")} dentro da referência. Lucro líquido de ${mil(D(A,"LUCRO LÍQUIDO"))} no ano; margem bruta de ${pct(kA["Margem bruta %"])}.`;
+$("sumScoreI").textContent = `${scI}/100 · Saudável`;
+$("sumI").textContent = `Faturamento de ${mil(rbmI)} por mês (+${pct(rbmI/rbmA-1,0)}), margem bruta de ${pct(kI["Margem bruta %"])}, EBITDA de ${pct(kI["Margem EBITDA %"])} e lucro líquido de ${mil(D(I,"LUCRO LÍQUIDO"))} no ano, com os mesmos 15 funcionários.`;
+const L = [
+ `Material básico é 60% das vendas, mas só 35% do lucro bruto. Os outros 40% do faturamento geram 65% do lucro.`,
+ `A loja opera ${pct(-kA["Margem de segurança %"])} abaixo do ponto de equilíbrio: o problema é margem, não despesa fixa (16% da receita líquida, dentro da referência).`,
+ `O ciclo financeiro de ${dias(kA["Ciclo financeiro (de caixa)"])} é o dobro do recomendado: a Petra recebe de construtoras em 48 dias e paga fornecedores em 28.`,
+ `Cada funcionário fatura ${brl(kA["Faturamento por funcionário (mês)"])} por mês, 60% da referência de R$ 50 mil: a equipe está dimensionada para pátio e carga, não para venda consultiva.`,
+ `Tintas (8%) e pisos e revestimentos (4,5%) têm margem de 36% a 45%, mas pouco espaço e giro baixo (2,4x): falta exposição, não demanda.`,
+ `Levar acabamentos e complementares a 60% do mix, comprar básico pela rede e encurtar o ciclo financeiro leva a Petra de prejuízo a ${pct(kI["Margem líquida %"])} de margem líquida em três anos.`];
+$("sumList").replaceChildren(...L.map(t=>el("li",{text:t})));
+
+/* ficha */
+const F = [["Razão social","Petra Materiais de Construção e Acabamentos Ltda."],["Nome fantasia","Petra Home Center"],["CNPJ","45.892.314/0001-85"],["Abertura","08/04/2022"],["CNAE principal","47.44-0-99 · Comércio varejista de materiais de construção em geral"],["Endereço","Av. Costa e Silva, 2450 · Polo Centro · Foz do Iguaçu/PR · CEP 85863-000"],["Sócios","Samir Al-Mansour e Tarek Ben-Zayed"],["Funcionários","15"],["Área de vendas","1.200 m²"],["Regime tributário","Lucro Real"]];
+$("ficha").replaceChildren(...F.map(([a,b])=>el("tr",null,el("td",{class:"l"},el("strong",{text:a})),el("td",{class:"l",text:b}))));
+
+/* referências */
+table("refTable",["Indicador","Bom","Crítico","O que mede"], REF.map(r=>[r[1],refTxt(r),badTxt(r),{
+ "Margem bruta":"Ganho sobre a mercadoria","Margem de contribuição":"Sobra para pagar a estrutura","Margem EBITDA":"Geração de caixa operacional","Margem líquida":"Lucro final",
+ "Despesas fixas / receita líquida":"Peso da estrutura","Folha / receita líquida":"Peso da equipe","Margem de segurança":"Folga sobre o ponto de equilíbrio","Giro de estoque":"Renovações do estoque no ano",
+ "Prazo médio de estocagem":"Dias de mercadoria parada","Prazo médio de recebimento":"Dias para receber","Prazo médio de pagamento":"Dias de prazo de fornecedor","Ciclo financeiro":"Dias financiados com caixa próprio","Faturamento por funcionário (mês)":"Eficiência da equipe"}[r[1]]]));
+
+/* atual */
+const facts = (s) => [[mi(D(s,"RECEITA BRUTA")),"receita bruta no ano"],[pct(K(s)["Margem bruta %"]),"margem bruta"],[mil(D(s,"EBITDA")),"EBITDA no ano"],[mil(D(s,"LUCRO LÍQUIDO")),"lucro líquido no ano"],[mi(K(s)["Necessidade de capital de giro (NCG)"]),"capital de giro necessário"]];
+fact("factsA", facts(A)); fact("factsI", facts(I));
+const DREL = [["Receita bruta","RECEITA BRUTA",1],["(−) Impostos e devoluções",null],["Receita líquida","RECEITA LÍQUIDA",1],["(−) CMV","(-) CMV (custo da mercadoria vendida)"],["Lucro bruto","LUCRO BRUTO",1],["(−) Despesas variáveis","var"],["Margem de contribuição","MARGEM DE CONTRIBUIÇÃO",1],["(−) Despesas fixas","TOTAL DESPESAS FIXAS"],["EBITDA","EBITDA",1],["(−) Depreciação","(-) Depreciação e amortização"],["(±) Resultado financeiro","fin"],["(−) IR / CSLL","(-) IR / CSLL (zero se Simples Nacional)"],["Lucro líquido","LUCRO LÍQUIDO",1]];
+const dv = (s,k) => k===null ? D(s,"(-) Impostos sobre vendas (DAS, ICMS, PIS/COFINS)")+D(s,"(-) Devoluções e descontos") : k==="var" ? D(s,"LUCRO BRUTO")-D(s,"MARGEM DE CONTRIBUIÇÃO") : k==="fin" ? D(s,"(+) Receitas financeiras")-D(s,"(-) Despesas financeiras (juros, tarifas)") : D(s,k);
+table("dreA",["Conta","R$","% RL"], DREL.map(([l,k,t])=>({t, c:[l, brl(dv(A,k)), pct(dv(A,k)/D(A,"RECEITA LÍQUIDA"))]})));
+table("kpiA",["Indicador","2026","Referência","Situação"], REF.map(r=>[r[1], r[2](val(A,r)), refTxt(r), pill(st(r,val(A,r)))]));
+
+Chart.defaults.font.family = getComputedStyle(document.documentElement).getPropertyValue("--f-body");
+Chart.defaults.color = "#454C55"; Chart.defaults.borderColor = "#D9DDE2"; Chart.defaults.animation = false; Chart.defaults.devicePixelRatio = 2;
+Chart.defaults.maintainAspectRatio = false; Chart.defaults.plugins.legend.labels.boxWidth = 12;
+const C = {ink:"#16191D", gr:"#454C55", brick:"#D9620F", blue:"#1452A8", good:"#1D8A3B", bad:"#C42B2B", warn:"#C25E00", soft:"#B9C0C9"};
+const tk = v => Math.abs(v)>=1e6 ? (v/1e6).toLocaleString("pt-BR",{maximumFractionDigits:1})+" mi" : Math.abs(v)>=1e3 ? Math.round(v/1e3)+" mil" : v;
+const MES=["Jan","Fev","Mar","Abr","Mai","Jun","Jul","Ago","Set","Out","Nov","Dez"];
+const pe = kA["Ponto de equilíbrio (receita bruta/mês)"];
+const nb = A.dre["RECEITA BRUTA"].m.filter(v=>v<pe).length;
+$("peTxt").textContent = `Em ${nb} dos 12 meses a receita fica abaixo do faturamento necessário para cobrir despesas variáveis, despesas fixas e depreciação (${mil(pe)} por mês).`;
+new Chart($("cPE"),{type:"bar",data:{labels:MES,datasets:[
+  {type:"line",label:"Ponto de equilíbrio",data:MES.map(()=>pe),borderColor:C.bad,borderDash:[6,4],pointRadius:0,borderWidth:2},
+  {label:"Receita bruta",data:A.dre["RECEITA BRUTA"].m,backgroundColor:A.dre["RECEITA BRUTA"].m.map(v=>v>=pe?C.blue:C.soft),borderRadius:3}]},
+  options:{scales:{y:{min:300000,ticks:{callback:tk}},x:{grid:{display:false}}}}});
+
+/* diagnóstico */
+const grp = DATA.groups;
+new Chart($("cMix"),{type:"bar",data:{labels:["Material básico","Acabamentos","Complementares"],datasets:[
+  {label:"% da receita",data:grp.atual.map(g=>+(g[0]*100).toFixed(1)),backgroundColor:C.soft,borderRadius:3},
+  {label:"% do lucro bruto",data:grp.atual.map(g=>+(g[1]*100).toFixed(1)),backgroundColor:C.brick,borderRadius:3}]},
+  options:{plugins:{tooltip:{callbacks:{label:x=>`${x.dataset.label}: ${x.raw}%`}}},scales:{y:{max:70,ticks:{callback:v=>v+"%"}},x:{grid:{display:false},ticks:{color:C.ink}}}},
+  plugins:[{id:"lbl",afterDatasetsDraw(ch){const c=ch.ctx;c.save();c.font="600 11px "+Chart.defaults.font.family;c.fillStyle=C.ink;c.textAlign="center";ch.data.datasets.forEach((ds,i)=>ch.getDatasetMeta(i).data.forEach((b,j)=>c.fillText(ds.data[j]+"%",b.x,b.y-4)));c.restore();}}]});
+const topC = A.cats.slice(0,12); const totA = A.cats.reduce((a,c)=>a+c.vendas,0);
+new Chart($("cMarg"),{type:"bar",data:{labels:topC.map(c=>c.cat),datasets:[{label:"Margem bruta",data:topC.map(c=>+(c.mb*100).toFixed(1)),backgroundColor:topC.map(c=>c.mb<.2?C.bad:c.mb<.35?C.gr:C.good),borderRadius:3}]},
+  options:{indexAxis:"y",plugins:{legend:{display:false}},scales:{x:{max:60,ticks:{callback:v=>v+"%"}},y:{grid:{display:false},ticks:{color:C.ink,font:{size:11}}}}},
+  plugins:[{id:"lbl",afterDatasetsDraw(ch){const c=ch.ctx;c.save();c.font="11px "+Chart.defaults.font.family;c.fillStyle=C.gr;ch.getDatasetMeta(0).data.forEach((b,j)=>c.fillText(pct(topC[j].vendas/totA,1)+" das vendas",b.x+5,b.y+4));c.restore();}}]});
+const G = [
+ ["Mix concentrado em baixa margem", `Material básico responde por 60% da receita com margem bruta de 13%. Cada R$ 100 vendidos de básico deixam R$ 13; cada R$ 100 de pisos e revestimentos deixam R$ 44. A margem bruta da loja (${pct(kA["Margem bruta %"])}) está abaixo do limite crítico de 25%.`],
+ ["Operação abaixo do ponto de equilíbrio", `A margem de contribuição de ${pct(kA["Índice de margem de contribuição %"])} exige ${mil(pe)} de venda mensal para cobrir ${mil(D(A,"TOTAL DESPESAS FIXAS")/12)} de despesas fixas e a depreciação. A média é ${mil(rbmA)}: margem de segurança de ${pct(kA["Margem de segurança %"])}.`],
+ ["Clientes financiados com o caixa da loja", `Prazo médio de recebimento de ${dias(kA["Prazo médio de recebimento - PMR"])} (prazo longo para construtoras) contra ${dias(kA["Prazo médio de pagamento - PMP"])} de prazo de fornecedores. O ciclo financeiro de ${dias(kA["Ciclo financeiro (de caixa)"])} exige ${mi(kA["Necessidade de capital de giro (NCG)"])} de capital de giro e gera ${mil(D(A,"(-) Despesas financeiras (juros, tarifas)"))} de despesas financeiras no ano.`],
+ ["Estoque lento em acabamentos", `Giro total de ${xx(kA["Giro de estoque (vezes/ano)"])} (${dias(kA["Prazo médio de estocagem - PME"])} de estoque). Básico gira 5,8x, mas tintas, pisos e metais giram só 2,4x: sortimento amplo, pouca exposição e venda passiva.`],
+ ["Equipe pouco produtiva em venda", `${brl(kA["Faturamento por funcionário (mês)"])} por funcionário por mês, contra a referência de R$ 50 mil. Boa parte do time trabalha em pátio, carga e entrega de básico, atividades de baixo valor por real vendido.`],
+ ["Despesas variáveis de entrega e cartão", `Frete e entregas (${pct(D(A,"Fretes e entregas")/D(A,"RECEITA BRUTA"))} da receita) e taxas de cartão (${pct(D(A,"Taxas de cartão / antecipação")/D(A,"RECEITA BRUTA"))}) consomem cerca de metade do lucro bruto que o material básico gera. Entrega gratuita sem valor mínimo é o principal vazamento.`]];
+$("gList").replaceChildren(...G.map(([h,t])=>el("div",{class:"g"},el("div",null,el("h3",{text:h}),el("p",{class:"small",text:t})))));
+const cyc = s => [K(s)["Prazo médio de estocagem - PME"],K(s)["Prazo médio de recebimento - PMR"],K(s)["Prazo médio de pagamento - PMP"]];
+const [eA,rA,pA]=cyc(A), [eI,rI,pI]=cyc(I);
+new Chart($("cCiclo"),{type:"bar",data:{labels:["2026 · operação","2026 · fornecedor","2029 · operação","2029 · fornecedor"],datasets:[
+  {label:"Estocagem (PME)",data:[[0,eA],null,[0,eI],null],backgroundColor:C.blue},
+  {label:"Recebimento (PMR)",data:[[eA,eA+rA],null,[eI,eI+rI],null],backgroundColor:C.brick},
+  {label:"Pagamento (PMP)",data:[null,[0,pA],null,[0,pI]],backgroundColor:C.good}]},
+  options:{indexAxis:"y",scales:{x:{ticks:{callback:v=>v+" d"}},y:{stacked:true,grid:{display:false},ticks:{color:C.ink}}},plugins:{tooltip:{callbacks:{label:x=>x.raw?`${x.dataset.label}: ${Math.round(x.raw[1]-x.raw[0])} dias`:""}}}},
+  plugins:[{id:"cf",afterDraw(ch){const c=ch.ctx;c.save();c.font="600 11px "+Chart.defaults.font.family;c.fillStyle=C.bad;const m0=ch.getDatasetMeta(1).data[0],m2=ch.getDatasetMeta(1).data[2];c.fillText("Ciclo financeiro: "+Math.round(eA+rA-pA)+" dias",ch.chartArea.left+4,m0.y-14);c.fillStyle=C.good;c.fillText("Ciclo financeiro: "+Math.round(eI+rI-pI)+" dias",ch.chartArea.left+4,m2.y-14);c.restore();}}]});
+table("abcA",["#","Subcategoria","Categoria","Vendas","Classe"], A.top.slice(0,12).map((t,i)=>[String(i+1),t.sub,t.cat,mil(t.v),t.cls]));
+
+/* frentes */
+const FR = [
+ ["Frente 1 · Mix e margem", "Crescer onde a margem está", [
+  ["1.1","Showroom de acabamentos","Reorganizar 400 dos 1.200 m² em ambientes de pisos, revestimentos, metais, louças e iluminação. Venda por projeto completo.","Acabamentos e complementares de 40% para 60% das vendas"],
+  ["1.2","Centro de cores","Tintometria, cartela de cores e consultoria de cor no balcão.","Tintas de 8% para 12% das vendas"],
+  ["1.3","Programa de especificadores","Cadastro e relacionamento com arquitetos, designers e engenheiros de Foz e Ciudad del Este; projetista 3D no time.","Pisos e revestimentos de 4,5% para 11,6%"],
+  ["1.4","Preço por margem-alvo","Margem-alvo por categoria, alçada de desconto e preço de combate só em itens-isca de básico (cimento, areia).","Margem bruta de 22% para 31%"]]],
+ ["Frente 2 · Compras, estoque e capital de giro", "Liberar o caixa preso na operação", [
+  ["2.1","Compras pela rede","Negociação conjunta de básico (cimento, ferro, blocos) pela central de compras da Rede Center Sim.","Margem do básico de 13% para 16%; prazo de fornecedor de 28 para 50 dias"],
+  ["2.2","Entrega direta de fábrica","Pedidos grandes de obra saem do fornecedor direto para o canteiro, sem passar pelo pátio.","Giro do básico de 5,8x para 8,7x"],
+  ["2.3","Estoque por classe ABC","Cobertura máxima: A 30 a 45 dias, B 45 a 60, C até 90. Liquidar itens sem giro.","Giro total de 4,3x para 5,8x"],
+  ["2.4","Política de crédito B2B","Limite por cliente, contrato de fornecimento e desconto para Pix ou pagamento antecipado.","Prazo de recebimento de 48 para 31 dias"]]],
+ ["Frente 3 · Eficiência comercial", "Mesma equipe vendendo mais valor", [
+  ["3.1","Frete com valor mínimo","Frete grátis só acima de um valor por região; roteirização das entregas.","Frete de 1,4% para 1,0% da receita"],
+  ["3.2","Renegociar adquirência","Concorrência entre credenciadoras e redução de antecipação.","Cartão de 2,2% para 1,7% da receita"],
+  ["3.3","Equipe consultiva","Duas pessoas do pátio para venda de acabamentos; comissão atrelada à margem.","R$ 29,9 mil para R$ 50,7 mil por funcionário"],
+  ["3.4","Canal Tríplice Fronteira","Atendimento em espanhol, catálogo no WhatsApp e retirada expressa pela BR-277.","Crescimento de clientes internacionais em acabamentos"]]]];
+$("fronts").replaceChildren(...FR.map(([t,s,items])=>el("div",{class:"front"},el("div",null,el("h3",{text:t}),el("p",{class:"small muted",text:s})),
+  ...items.map(([c,n,d,m])=>el("div",{class:"ini"},el("b",{class:"code",text:c}),el("div",null,el("strong",{text:n}),el("p",{class:"small",text:d}),el("p",{class:"meta",text:"Meta: "+m})))))));
+
+/* roadmap */
+$("ncgLib").textContent = mil(kA["Necessidade de capital de giro (NCG)"]-kI["Necessidade de capital de giro (NCG)"]);
+const TR = DATA.traj;
+new Chart($("cTraj"),{type:"bar",data:{labels:TR.map(t=>t.ano),datasets:[
+  {type:"line",label:"Margem EBITDA",data:TR.map(t=>t.ebitda*100),borderColor:C.brick,backgroundColor:C.brick,yAxisID:"y2",pointRadius:4,borderWidth:2},
+  {label:"Faturamento mensal médio",data:TR.map(t=>t.rbm),backgroundColor:TR.map((t,i)=>i===0?C.soft:C.blue),borderRadius:3}]},
+  options:{scales:{y:{beginAtZero:true,ticks:{callback:tk}},y2:{position:"right",min:0,max:12,ticks:{callback:v=>v+"%"},grid:{display:false}},x:{grid:{display:false},ticks:{color:C.ink}}},plugins:{tooltip:{callbacks:{label:x=>x.dataset.yAxisID==="y2"?`EBITDA: ${x.raw.toFixed(1)}%`:`Faturamento: ${brl(x.raw)}`}}}}});
+const MT = [["Faturamento mensal médio",brl(rbmA),"R$ 540.000","R$ 650.000",brl(rbmI)],["Material básico nas vendas","60%","52%","46%","40%"],["Margem bruta",pct(kA["Margem bruta %"]),"25,5%","28,5%",pct(kI["Margem bruta %"])],["Margem EBITDA",pct(kA["Margem EBITDA %"]),"4,0%","7,5%",pct(kI["Margem EBITDA %"])],["Ciclo financeiro",dias(kA["Ciclo financeiro (de caixa)"]),"80 dias","60 dias",dias(kI["Ciclo financeiro (de caixa)"])],["Faturamento por funcionário",brl(kA["Faturamento por funcionário (mês)"]),"R$ 36.000","R$ 43.300",brl(kI["Faturamento por funcionário (mês)"])]];
+table("metas",["Indicador","2026 (real)","2027","2028","2029"], MT);
+
+/* ideal */
+new Chart($("cMix2"),{type:"bar",data:{labels:["2026","2029"],datasets:[
+  {label:"Material básico",data:[grp.atual[0][0]*100,grp.ideal[0][0]*100],backgroundColor:C.soft},
+  {label:"Acabamentos",data:[grp.atual[1][0]*100,grp.ideal[1][0]*100],backgroundColor:C.brick},
+  {label:"Complementares",data:[grp.atual[2][0]*100,grp.ideal[2][0]*100],backgroundColor:C.blue}]},
+  options:{indexAxis:"y",scales:{x:{stacked:true,max:100,ticks:{callback:v=>v+"%"}},y:{stacked:true,grid:{display:false},ticks:{color:C.ink}}},plugins:{tooltip:{callbacks:{label:x=>`${x.dataset.label}: ${x.raw.toFixed(1)}%`}}}},
+  plugins:[{id:"lbl",afterDatasetsDraw(ch){const c=ch.ctx;c.save();c.font="600 11px "+Chart.defaults.font.family;c.textAlign="center";ch.data.datasets.forEach((ds,i)=>ch.getDatasetMeta(i).data.forEach((b,j)=>{c.fillStyle=i===0?C.ink:"#fff";c.fillText(Math.round(ds.data[j])+"%",(b.x+b.base)/2,b.y+4);}));c.restore();}}]});
+const steps=[["Lucro 2026",B.LLa,"t"],["Volume",B.vol],["Mix e margem",B.mix],["Desp. variáveis",B.var],["Desp. fixas",B.fix],["Depreciação",B.dep],["Financeiro",B.fin],["IR / CSLL",B.ir],["Lucro 2029",B.LLi,"t"]];
+let run=0; const wd=steps.map(([l,v,t])=>{ if(t){run=v; return [0,v];} const r=[run,run+v]; run+=v; return r; });
+new Chart($("cBridge"),{type:"bar",data:{labels:steps.map(s=>s[0]),datasets:[{data:wd.map(r=>r.map(v=>v/1000)),backgroundColor:steps.map(([l,v,t])=>t?(v<0?C.bad:C.ink):(v<0?C.bad:C.good)),borderRadius:2}]},
+  options:{plugins:{legend:{display:false},tooltip:{callbacks:{label:x=>mil(steps[x.dataIndex][1])}}},scales:{y:{ticks:{callback:v=>v+" mil"}},x:{grid:{display:false},ticks:{color:C.ink,font:{size:10},maxRotation:40,minRotation:0,autoSkip:false}}}},
+  plugins:[{id:"lbl",afterDatasetsDraw(ch){const c=ch.ctx;c.save();c.font="600 10px "+Chart.defaults.font.family;c.textAlign="center";c.fillStyle=C.ink;ch.getDatasetMeta(0).data.forEach((b,j)=>{const v=Math.round(steps[j][1]/1000);c.fillText((v>0&&!steps[j][2]?"+":"")+v,b.x,Math.min(b.y,b.base)-4);});c.restore();}}]});
+table("prem",["Premissa","2026","2029","Por quê"],[
+ ["Faturamento mensal médio",brl(rbmA),brl(rbmI),"Crescimento puxado por acabamentos e B2B com entrega direta"],
+ ["Material básico / acabamentos / complementares",grp.atual.map(g=>Math.round(g[0]*100)+"%").join(" / "),grp.ideal.map(g=>Math.round(g[0]*100)+"%").join(" / "),"Showroom, centro de cores e especificadores"],
+ ["Margem bruta do material básico","13%","16%","Compras pela rede e fim da entrega gratuita sem mínimo"],
+ ["Tintas / pisos e revestimentos nas vendas","8% / 4,5%","12% / 11,6%","Meta dos sócios para tintas; showroom para pisos"],
+ ["Despesas variáveis (% da receita bruta)",pct((D(A,"LUCRO BRUTO")-D(A,"MARGEM DE CONTRIBUIÇÃO"))/D(A,"RECEITA BRUTA")),pct((D(I,"LUCRO BRUTO")-D(I,"MARGEM DE CONTRIBUIÇÃO"))/D(I,"RECEITA BRUTA")),"Cartão e frete menores; comissão maior, ligada à margem"],
+ ["Despesas fixas mensais",mil(D(A,"TOTAL DESPESAS FIXAS")/12),mil(D(I,"TOTAL DESPESAS FIXAS")/12),"Mais marketing, sistemas e remuneração variável"],
+ ["Funcionários","15","15","Requalificação, sem aumento de quadro"],
+ ["PMR / PMP",`${Math.round(rA)} / ${Math.round(pA)} dias`,`${Math.round(rI)} / ${Math.round(pI)} dias`,"Política de crédito e prazo negociado pela rede"],
+ ["Impostos sobre vendas e devoluções","10,5% da receita","10,5% da receita","Mantido; regime Lucro Real"]]);
+
+/* comparativo */
+table("dreC",["Conta","2026","2029"], DREL.map(([l,k,t])=>({t,c:[l,mil(dv(A,k)),mil(dv(I,k))]})));
+table("kpiC",["Indicador","2026","","2029",""], REF.map(r=>[r[1], r[2](val(A,r)), pill(st(r,val(A,r))), r[2](val(I,r)), pill(st(r,val(I,r)))]));
+</script>
+</body></html>
